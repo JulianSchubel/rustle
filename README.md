@@ -8,41 +8,47 @@ A small command line ETL tool.
 
 # Commands  
 
-<bootstrap>Bootstrap</bootstrap>
+<details>
+<summary>Bootstrap</summary>
+</details>
 
-<generate>Generate  
+<details>
+<summary>Generat</summary>
 
-<usage open>Usage</usage>
-```bash
-rustle generate <output_path> --rows <N> --format <csv|ndjson>
-```
-The `rustle generate` command creates synthetic datasets for testing the ETL
-pipeline. It can generate CSV or NDJSON files containing realistic `metrics`
-records.
+<details open>
+    <summary>Usage</summary>
+    ```bash
+    rustle generate <output_path> --rows <N> --format <csv|ndjson>
+    ```
+    </details>
+    The `rustle generate` command creates synthetic datasets for testing the ETL
+    pipeline. It can generate CSV or NDJSON files containing realistic `metrics`
+    records.
 
-| Field       | Type   | Description                         |
-| ----------- | ------ | ----------------------------------- |
-| `id`        | string | Unique identifier (UUID v4)         |
-| `timestamp` | string | ISO-8601 timestamp                  |
-| `value`     | float  | Random sensor measurement           |
-| `tag`       | string | Random label                        |
+    | Field       | Type   | Description                         |
+    | ----------- | ------ | ----------------------------------- |
+    | `id`        | string | Unique identifier (UUID v4)         |
+    | `timestamp` | string | ISO-8601 timestamp                  |
+    | `value`     | float  | Random sensor measurement           |
+    | `tag`       | string | Random label                        |
 
-<required_arguments>Required Arguments
+    <details>
+    <summary>Required Arguments</summary>
+    | Argument        | Description                           |
+    | --------------- | ------------------------------------- |
+    | `<output_path>` | File to write the generated data into |
 
-| Argument        | Description                           |
-| --------------- | ------------------------------------- |
-| `<output_path>` | File to write the generated data into |
+    </details>
 
-</required_arguments>
-
-<options>Options
-| Flag              | Description                                              |
-| ----------------- | -------------------------------------------------------- |
-| `--rows <N>`      | Number of synthetic rows to generate (default: `100000`) |
-| `--format <csv\| ndjson>` | Output format (default: `csv`) |                 |
-| `--seed <number>` | Optional RNG seed for reproducible output                |
-</options>
-</generate>
+    <details>
+    <summary>Options</summary>
+    | Flag              | Description                                              |
+    | ----------------- | -------------------------------------------------------- |
+    | `--rows <N>`      | Number of synthetic rows to generate (default: `100000`) |
+    | `--format <csv\| ndjson>` | Output format (default: `csv`) |                 |
+    | `--seed <number>` | Optional RNG seed for reproducible output                |
+    </details>
+</details>
 
 
 
