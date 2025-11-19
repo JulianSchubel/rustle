@@ -1,3 +1,2 @@
-pub fn init_load() -> () {
-    println!("Hello, load");
-}
+mod init;
+pub use self::init::init;

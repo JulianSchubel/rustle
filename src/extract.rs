@@ -1,3 +1,2 @@
-pub fn init_extract() -> () {
-    println!("Hello, extract");
-}
+mod init;
+pub use self::init::*;

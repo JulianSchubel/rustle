@@ -1,8 +1,25 @@
+mod cli;
+mod commands;
+
 use ::rustle::*;
-fn main() {
-    println!("Hello, world!");
-    data_generator::init_extract();
-    extract::init_extract();
-    transform::init_transform();
-    load::init_load(); 
+use clap::Parser;
+use cli::{Cli, Commands};
+
+fn main() -> anyhow::Result<()> {
+    let cli = Cli::parse();
+
+    extract::init();
+    transform::init();
+    load::init();
+
+    match cli.command {
+        Commands::Bootstrap { db_path, drop, force } => {
+            commands::bootstrap::bootstrap(&db_path, drop, force)?;
+        }
+        _ => {
+            println!("Unknown command");
+        }
+    }
+
+    Ok(())
 }
