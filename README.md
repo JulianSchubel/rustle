@@ -3,3 +3,47 @@
 A small command line ETL tool.
 
 ![](assets/images/logo_alpha.png)
+
+# Quickstart
+
+# Commands  
+
+<bootstrap>Bootstrap</bootstrap>
+
+<generate>Generate  
+
+<usage open>Usage</usage>
+```bash
+rustle generate <output_path> --rows <N> --format <csv|ndjson>
+```
+The `rustle generate` command creates synthetic datasets for testing the ETL
+pipeline. It can generate CSV or NDJSON files containing realistic `metrics`
+records.
+
+| Field       | Type   | Description                         |
+| ----------- | ------ | ----------------------------------- |
+| `id`        | string | Unique identifier (UUID v4)         |
+| `timestamp` | string | ISO-8601 timestamp                  |
+| `value`     | float  | Random sensor measurement           |
+| `tag`       | string | Random label                        |
+
+<required_arguments>Required Arguments
+
+| Argument        | Description                           |
+| --------------- | ------------------------------------- |
+| `<output_path>` | File to write the generated data into |
+
+</required_arguments>
+
+<options>Options
+| Flag              | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| `--rows <N>`      | Number of synthetic rows to generate (default: `100000`) |
+| `--format <csv\| ndjson>` | Output format (default: `csv`) |                 |
+| `--seed <number>` | Optional RNG seed for reproducible output                |
+</options>
+</generate>
+
+
+
+## Run
