@@ -15,7 +15,10 @@ fn main() -> anyhow::Result<()> {
     match cli.command {
         Commands::Bootstrap { db_path, drop, force } => {
             commands::bootstrap::bootstrap(&db_path, drop, force)?;
-        }
+        },
+        Commands::GenerateDataset { output, records } => {
+            commands::generate::generate_dataset(&output, records)?;
+        },
         _ => {
             println!("Unknown command");
         }
