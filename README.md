@@ -43,8 +43,9 @@ Once the sample data has been created, run the ETL pipeline
 ```
 
 There is a `unique key` constraint on the `id` field, so one must either 
-generate new sample data or re-bootstrap the database after a successful run.
-This can be done by providing the `--drop` option to the `generate` command.
+generate new sample data after a completely successful run. Alternatively one
+can tear down and recreate the database schema. The database can be removed 
+by providing the `--drop` option to the `bootstrap` command.
 
 For more information on `rustle` commands, see the [commands](#commands)
 section.
