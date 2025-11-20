@@ -1,3 +1,4 @@
+use uuid::{Uuid};
 use std::io::Write;
 use anyhow::Result;
 use rand::{Rng, seq::SliceRandom};
@@ -19,8 +20,8 @@ pub fn generate(output: &str, records: usize, format: &str) -> Result<()> {
     let mut rng = rand::thread_rng();
     
     /* Generate n random records */
-    for i in 0..records {
-        let id = format!("id-{i}");
+    for _ in 0..records {
+        let id = Uuid::new_v4().to_string();
         let timestamp = Local::now()
             .to_rfc3339();
         let value =  rng.gen_range(-100.0..100.0);
