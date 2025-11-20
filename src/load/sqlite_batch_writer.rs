@@ -106,7 +106,7 @@ fn configure_connection(conn: &Connection) -> rusqlite::Result<()> {
     * ∙ NORMAL mode is the middle ground
     * */
     conn.pragma_update(None, "synchronous", &"NORMAL")?;
-    conn.pragma_update(None, "temp_store", &"MEMORY")?;
-    conn.pragma_update(None, "mmap_size", & (256 * 1024 * 1024))?;
+//    conn.pragma_update(None, "temp_store", &"MEMORY")?;
+//    conn.pragma_update(None, "mmap_size", & (256 * 1024 * 1024))?;
     Ok(())
 }

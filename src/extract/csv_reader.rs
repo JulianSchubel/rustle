@@ -12,7 +12,6 @@ pub fn spawn_csv_reader(path: String, sender: flume::Sender<super::RawRecord>, c
             .from_path(path)
             .unwrap();
 
-        println!("Detected CSV headers: {:?}", rdr.headers());
         for result in rdr.deserialize::<super::RawRecord>() {
             match result {
                 Ok(rec) => {
