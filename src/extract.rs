@@ -1,4 +1,3 @@
-mod init;
 mod csv_reader;
 mod ndjson_reader;
 
@@ -6,7 +5,6 @@ use std::thread;
 use serde::Deserialize;
 use flume;
 
-pub use self::init::*;
 pub use csv_reader::spawn_csv_reader;
 pub use ndjson_reader::spawn_ndjson_reader;
 

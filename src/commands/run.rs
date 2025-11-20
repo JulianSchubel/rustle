@@ -47,7 +47,7 @@ pub fn run(input: &str, db_path: &str, threads: usize, buffer_size: usize, csv_h
         .unwrap()
         .unwrap();
 
-    pb.finish_with_message("ETL complete");
+    pb.finish_with_message("ETL completed");
 
     /* Record the moment of termination */
     let duration = start.elapsed().as_secs_f64();
@@ -62,6 +62,5 @@ pub fn run(input: &str, db_path: &str, threads: usize, buffer_size: usize, csv_h
     println!("{} {}", "Total records processed:".yellow(), (ok + fail).to_string().yellow().bold());
     println!("{}", "==============================================".bold());
 
-    println!("ETL completed");
     Ok(())
 }

@@ -1,7 +1,6 @@
-mod init;
 mod transform;
 mod spawn_workers;
-pub use self::init::init;
+
 pub use self::transform::transform;
 pub use self::spawn_workers::spawn_workers;
 
