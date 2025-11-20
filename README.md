@@ -4,6 +4,11 @@ A small command line ETL tool.
 
 ![](assets/images/logo_alpha.png)
 
+# Sample Metrics
+
+![](assets/images/rustle_1kk_csv.png)
+![](assets/images/rustle_1kk_ndjson.png)
+
 # Quickstart
 
 Install Rustle by building it from source:
@@ -12,11 +17,11 @@ Install Rustle by building it from source:
 cargo build --release
 ```
 
-The binary executable `rustle` will then be located in the /target/release
-directory. Copy the executable into the current working directory or navigate into the directory.
+The binary executable `rustle` will then be located in the `/target/release`
+directory under the project root. Copy the executable into the current working directory or navigate into the `/target/directory` directory.
 
-Rustle provides database bootstrapping for SQLite as part of the tool. To
-bootstrap the database run
+Rustle provides database bootstrapping for SQLite via the `rustle boostrap`
+command. To bootstrap the database run
 
 ```bash
 ./rustle bootstrap metrics.db
@@ -51,9 +56,13 @@ The ETL strategy taken by Rustle is as follows:
 The rustle bootstrap command initializes the SQLite database by creating the
 metrics table. One can drop an existing table when run with the `--drop` option.
 
+<details open> <summary>Usage</summary>
+
 ```bash
     rustle bootstrap <db_path> [--drop] [--force]
 ```
+
+</details>
 
 <details> <summary>Required Arguments</summary>
 
@@ -70,10 +79,6 @@ metrics table. One can drop an existing table when run with the `--drop` option.
 
 </details>
 
-</details>
-
-
-<details open> <summary>Usage</summary>
 </details>
 
 <details> <summary>Generate</summary>
