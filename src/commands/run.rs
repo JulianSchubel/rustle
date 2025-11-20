@@ -59,7 +59,7 @@ pub fn run(input: &str, db_path: &str, threads: usize, buffer_size: usize, csv_h
     println!("{} {:.0}", "Rows/s:".cyan(), rps);
     println!("{} {}", "Successful rows:".green(), ok.to_string().green().bold());
     println!("{} {}", "Failed rows:".red(), fail.to_string().red().bold());
-    println!("{} {}", "Total records process:".yellow(), (ok + fail).to_string().yellow().bold());
+    println!("{} {}", "Total records processed:".yellow(), (ok + fail).to_string().yellow().bold());
     println!("{}", "==============================================".bold());
 
     println!("ETL completed");
