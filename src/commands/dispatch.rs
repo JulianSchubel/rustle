@@ -9,8 +9,8 @@ pub fn dispatch(command: Commands) -> Result<()>{
         Commands::Generate { output, records, format } => {
             super::generate::generate(&output, records, &format)?;
         },
-        Commands::Run { input, db_path, threads, buffer} => {
-            super::run::run(&input, &db_path, threads, buffer)?;
+        Commands::Run { input, db_path, threads, buffer, csv_headers} => {
+            super::run::run(&input, &db_path, threads, buffer, csv_headers)?;
         },
     }
 

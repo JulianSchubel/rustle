@@ -19,6 +19,11 @@ pub fn generate(output: &str, records: usize, format: &str) -> Result<()> {
     let file = std::fs::File::create(output)?;
     let mut rng = rand::thread_rng();
     
+    /* Add headers for the CSV format */
+    if format == "csv" {
+        writeln!(&file, "id, timestamp, value, tag")?;
+    }
+
     /* Generate n random records */
     for _ in 0..records {
         let id = Uuid::new_v4().to_string();

@@ -31,8 +31,20 @@ pub enum Commands {
         db_path: String,
         
         /* Number of worker threads */
-        #[arg(short, long, default_value = "4")]
+        #[arg(short('t'), long, default_value = "4")]
         threads: usize,
+
+        /* Buffer size for bounded channels */
+        #[arg(short('b'), long, default_value = "10000")]
+        buffer: usize,
+
+        /* CSV headers */
+        #[arg(long, default_value_t = true)]
+        csv_headers: bool,
+
+        /* Batch size */
+        #[arg(long, default_value = "1000")]
+        batch_size: usize,
     },  
 
     /// Generate a sample dataset
@@ -41,11 +53,11 @@ pub enum Commands {
         output: String,
 
         /* Number of records to generate */
-        #[arg(short, long, default_value = "100000")]
+        #[arg(short('n'), long, default_value = "100000")]
         records: usize,
 
         /* output format */ 
-        #[arg(short, long, default_value = "csv")]
+        #[arg(short('f'), long, default_value = "csv")]
         format: String,
     }
 }
