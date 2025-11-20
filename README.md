@@ -34,19 +34,22 @@ Once the sample data has been created, run the ETL pipeline
 ./rustle run sample.csv metrics.db --threads 4 --buffer-size 10000 --batch-size 1000
 ```
 
+There is a `unique key` constraint on the `id` field, so one must either 
+generate new sample data or re-bootstrap the database after a successful run.
+This can be done by providing the `--drop` option to the `generate` command.
 
 # Notes on ETL strategy
 
-The ETL strategy taken by Rustle is as follows
-∙ ETL operations are distributed over threads. That is, reading, transforming, and loading, are handled separately. 
-∙ Threads communicate via MPMC bounded channels that ensure controlled memory usage. 
-∙ Writes use prepared, cached, multi-row INSERT statements for high performance.
+The ETL strategy taken by Rustle is as follows:
+- ETL operations are distributed over threads. That is, reading, transforming, and loading, are handled separately. 
+- Threads communicate via MPMC bounded channels that ensure controlled memory usage. 
+- Writes use prepared, cached, multi-row INSERT statements for high performance.
 
 # Commands  
 
 <details> <summary>Bootstrap</summary>
 The rustle bootstrap command initializes the SQLite database by creating the
-metrics table. One can drop the existing table when run with --drop.
+metrics table. One can drop an existing table when run with the `--drop` option.
 
 ```bash
     rustle bootstrap <db_path> [--drop] [--force]
@@ -75,6 +78,20 @@ metrics table. One can drop the existing table when run with --drop.
 
 <details> <summary>Generate</summary>
 
+The `rustle generate` command creates synthetic datasets for testing the ETL
+pipeline. It can generate `csv` or `ndjson` files containing realistic `metrics`
+records.
+
+Each generated record has the following structure:
+
+| Field       | Type   | Description                 |
+| ----------- | ------ | --------------------------- |
+| `id`        | string | Unique identifier (UUID v4) |
+| `timestamp` | string | ISO-8601 timestamp          |
+| `value`     | float  | Random sensor measurement   |
+| `tag`       | string | Random categorical label    |
+
+
 <details open> <summary>Usage</summary>  
 
 ```bash
@@ -83,9 +100,6 @@ rustle generate <output_path> --rows <N> --format <csv|ndjson>
 
 </details> 
 
-The `rustle generate` command creates synthetic datasets for testing the ETL
-pipeline. It can generate `csv` or `ndjson` files containing realistic `metrics`
-records.
 
 | Field       | Type   | Description                         |
 | ----------- | ------ | ----------------------------------- |
