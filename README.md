@@ -106,7 +106,7 @@ Each generated record has the following structure:
 <details open> <summary>Usage</summary>  
 
 ```bash
-rustle generate <output_path> --rows <N> --format <csv|ndjson>
+rustle generate <output_path> --records <N> --format <csv|ndjson>
 ```
 
 </details> 
