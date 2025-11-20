@@ -43,7 +43,7 @@ Once the sample data has been created, run the ETL pipeline
 ./rustle run sample.csv metrics.db --threads 4 --buffer-size 10000 --batch-size 1000
 ```
 
-There is a `unique key` constraint on the `id` field, so one must either 
+There is a `unique key` constraint on the `id` field, so one must 
 generate new sample data after a completely successful run. Alternatively one
 can tear down and recreate the database schema. The database can be removed 
 by providing the `--drop` option to the `bootstrap` command.
