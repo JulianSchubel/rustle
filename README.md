@@ -54,7 +54,7 @@ section.
 The ETL strategy taken by Rustle is as follows:
 - ETL operations are distributed over threads. That is, reading, transforming, and loading, are handled separately. 
 - Threads communicate via MPMC bounded channels that ensure controlled memory usage. 
-- Writes use prepared, cached, multi-row INSERT statements for high performance.
+- Writes use prepared multi-row INSERT statements for high performance.
 
 # Commands  
 
@@ -123,7 +123,7 @@ rustle generate <output_path> --rows <N> --format <csv|ndjson>
 
 | Argument        | Description                           |
 | --------------- | ------------------------------------- |
-| `<output>` | File path to write the generated data into |
+| `<output_path>` | File path to write the generated data into |
 
 </details>
 
@@ -131,8 +131,8 @@ rustle generate <output_path> --rows <N> --format <csv|ndjson>
 
 | Flag              | Description                                              |
 | ----------------- | -------------------------------------------------------- |
-| `--records <N>`      | Number of synthetic records to generate (default: `100000`) |
-| `--format <csv\| ndjson>` | Output format (default: `csv`) |                 |
+| `-n, --records <N>`      | Number of synthetic records to generate (default: `100000`) |
+| `-f, --format <csv\| ndjson>` | Output format (default: `csv`) |                 |
 
 </details>
 
@@ -147,7 +147,7 @@ Supports `csv` and `ndjson` input, multi-threaded transforms, and batched SQLite
 <details open> <summary>Usage</summary>
 
 ```bash
-./rustle run <input> <db_path> --threads <N> --buffer <size> --batch-size <size> 
+./rustle run <input_path> <db_path> --threads <N> --buffer-size <size> --batch-size <size> 
 ```
 
 </details> 
@@ -156,7 +156,7 @@ Supports `csv` and `ndjson` input, multi-threaded transforms, and batched SQLite
     
 | Argument    | Description                      |
 | ----------- | -------------------------------- |
-| `<input>`   | Input CSV or NDJSON file         |
+| `<input_path>`   | File path to input csv or ndjson file |
 | `<db_path>` | Destination SQLite database path |
 
 </details> <details> <summary>Options</summary>
@@ -164,7 +164,7 @@ Supports `csv` and `ndjson` input, multi-threaded transforms, and batched SQLite
 | Flag                  | Description                                              |
 | --------------------- | -------------------------------------------------------- |
 | `-t, --threads <N>`   | Number of transform worker threads (default: `4`)        |
-| `-b, --buffer <size>` | Bounded channel buffer size (default: `10000`)           |
+| `-b, --buffer-size <size>` | Bounded channel buffer size (default: `10000`)           |
 | `--csv-headers`       | Whether the CSV input contains headers (default: `true`) |
 | `--batch-size <size>` | Number of rows per SQLite insert batch (default: `1000`) |
 
