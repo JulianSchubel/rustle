@@ -36,7 +36,7 @@ pub enum Commands {
 
         /* Buffer size for bounded channels */
         #[arg(short('b'), long, default_value = "10000")]
-        buffer: usize,
+        buffer_size: usize,
 
         /* CSV headers */
         #[arg(long, default_value_t = true)]

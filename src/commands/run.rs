@@ -5,7 +5,7 @@ use indicatif::{ProgressBar, ProgressStyle};
 use rustle::{extract, transform, load};
 
 
-pub fn run(input: &str, db_path: &str, threads: usize, buffer: usize, csv_headers: bool) -> Result<()> {
+pub fn run(input: &str, db_path: &str, threads: usize, buffer_size: usize, csv_headers: bool, batch_size: usize) -> Result<()> {
     println!("Running ETL:");
     println!("  input: {}", input);
     println!("  db: {}", db_path);
@@ -22,8 +22,8 @@ pub fn run(input: &str, db_path: &str, threads: usize, buffer: usize, csv_header
     );
 
     /* Create Sender / Receiver pairs for bounded channels */
-    let (sender_raw, receiver_raw) = flume::bounded(buffer);
-    let (sender_transformed, receiver_transformed) = flume::bounded(buffer);
+    let (sender_raw, receiver_raw) = flume::bounded(buffer_size);
+    let (sender_transformed, receiver_transformed) = flume::bounded(buffer_size);
 
     /* Record the moment of initiation */
     let start = time::Instant::now();
@@ -38,12 +38,14 @@ pub fn run(input: &str, db_path: &str, threads: usize, buffer: usize, csv_header
 
     pb.set_message("Loading");
     /* Create writer thread */
-    let writer = load::spawn_writer(db_path.to_string(), receiver_transformed);
+    let writer = load::spawn_batch_writer(db_path.to_string(), receiver_transformed, batch_size);
 
     /* Join threads - ensure that threads finish execution */
     reader.join().unwrap();
     transformers.join().unwrap();
-    let (ok, fail) = writer.join().unwrap();
+    let (ok, fail) = writer.join()
+        .unwrap()
+        .unwrap();
 
     pb.finish_with_message("ETL complete");
 
@@ -57,6 +59,7 @@ pub fn run(input: &str, db_path: &str, threads: usize, buffer: usize, csv_header
     println!("{} {:.0}", "Rows/s:".cyan(), rps);
     println!("{} {}", "Successful rows:".green(), ok.to_string().green().bold());
     println!("{} {}", "Failed rows:".red(), fail.to_string().red().bold());
+    println!("{} {}", "Total records process:".yellow(), (ok + fail).to_string().yellow().bold());
     println!("{}", "==============================================".bold());
 
     println!("ETL completed");
