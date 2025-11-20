@@ -6,7 +6,10 @@ A small command line ETL tool.
 
 # Sample Metrics
 
+ETL performance for 1,000,000 `csv` entries.
 ![](assets/images/rustle_1kk_csv.png)
+
+ETL performance for 1,000,000 `ndjson` records.
 ![](assets/images/rustle_1kk_ndjson.png)
 
 # Quickstart
