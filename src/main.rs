@@ -16,8 +16,8 @@ fn main() -> anyhow::Result<()> {
         Commands::Bootstrap { db_path, drop, force } => {
             commands::bootstrap::bootstrap(&db_path, drop, force)?;
         },
-        Commands::GenerateDataset { output, records } => {
-            commands::generate::generate_dataset(&output, records)?;
+        Commands::Generate { output, records, format } => {
+            commands::generate::generate(&output, records, &format)?;
         },
         _ => {
             println!("Unknown command");

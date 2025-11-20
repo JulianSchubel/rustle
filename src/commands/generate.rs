@@ -1,7 +1,7 @@
 use std::io::Write;
 use anyhow::Result;
 use rand::{Rng, seq::SliceRandom};
-use chrono::Utc;
+use chrono::{Local};
 use serde::Serialize;
 
 #[derive(Serialize)]
@@ -12,7 +12,7 @@ struct Record {
     tag: String,
 }
 
-pub fn generate_dataset(output: &str, records: usize) -> Result<()> {
+pub fn generate(output: &str, records: usize, format: &str) -> Result<()> {
     println!("Generating {} records -> {}", records, output);
 
     let file = std::fs::File::create(output)?;
@@ -20,18 +20,33 @@ pub fn generate_dataset(output: &str, records: usize) -> Result<()> {
     
     /* Generate n random records */
     for i in 0..records {
-        let rec = Record {
-            id: format!("id-{i}"),
-            timestamp: Utc::now()
-                .to_string(),
-            value: rng.gen_range(-100.0..100.0),
-            tag: ["alpha", "beta", "gamma"]
+        let id = format!("id-{i}");
+        let timestamp = Local::now()
+            .to_rfc3339();
+        let value =  rng.gen_range(-100.0..100.0);
+        let tag = ["alpha", "beta", "gamma"]
                 .choose(&mut rng).unwrap()
-                .to_string(),
+                .to_string();
+        let rec = Record {
+            id,
+            timestamp,
+            value,
+            tag,
+        };
+        if format == "ndjson" { 
+            serde_json::to_writer(&file, &rec)?;
+            writeln!(&file)?;
+        } else {
+            writeln!(
+                &file, 
+                "{},{},{},{}", 
+                rec.id,
+                rec.timestamp,
+                rec.value,
+                rec.tag
+            )?;
         };
 
-        serde_json::to_writer(&file, &rec)?;
-        writeln!(&file)?;
     }
 
     println!("Done.");

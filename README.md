@@ -52,7 +52,7 @@ records.
 
 | Flag              | Description                                              |
 | ----------------- | -------------------------------------------------------- |
-| `--rows <N>`      | Number of synthetic rows to generate (default: `100000`) |
+| `--records <N>`      | Number of synthetic records to generate (default: `100000`) |
 | `--format <csv\| ndjson>` | Output format (default: `csv`) |                 |
 | `--seed <number>` | Optional RNG seed for reproducible output                |
 

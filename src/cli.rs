@@ -36,12 +36,16 @@ pub enum Commands {
     },  
 
     /// Generate a sample dataset
-    GenerateDataset {
-        /* Output file - .csv or .ndjson */
+    Generate {
+        /* Output file */
         output: String,
 
         /* Number of records to generate */
         #[arg(short, long, default_value = "100000")]
         records: usize,
+
+        /* output format */ 
+        #[arg(short, long, default_value = "csv")]
+        format: String,
     }
 }
