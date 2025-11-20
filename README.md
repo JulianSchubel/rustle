@@ -46,7 +46,7 @@ There is a `unique key` constraint on the `id` field, so one must either
 generate new sample data or re-bootstrap the database after a successful run.
 This can be done by providing the `--drop` option to the `generate` command.
 
-For more information on `rustle` commands, see the [commands](#1-commands)
+For more information on `rustle` commands, see the [commands](#commands)
 section.
 
 # Notes on ETL strategy
