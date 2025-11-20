@@ -21,7 +21,7 @@ cargo build --release
 ```
 
 The binary executable `rustle` will then be located in the `/target/release`
-directory under the project root. Copy the executable into the current working directory or navigate into the `/target/directory` directory.
+directory under the project root.
 
 Rustle provides database bootstrapping for SQLite via the `rustle boostrap`
 command. To bootstrap the database run
