@@ -17,7 +17,7 @@ pub fn run(input: &str, db_path: &str, threads: usize, buffer_size: usize, csv_h
     pb.enable_steady_tick(time::Duration::from_millis(120));
     pb.set_style(
         ProgressStyle::default_spinner()
-            .tick_strings(&["⠁", "⠈", "⠐", "⠠", "⢀", "⡀"])
+            .tick_strings(&["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧"])
             .template("{spinner:.green} {msg}")?
     );
 
