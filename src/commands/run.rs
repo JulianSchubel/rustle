@@ -5,11 +5,10 @@ use indicatif::{ProgressBar, ProgressStyle};
 use rustle::{extract, transform, load};
 
 
-pub fn run(input: &str, db_path: &str, threads: usize, buffer_size: usize, csv_headers: bool, batch_size: usize) -> Result<()> {
+pub fn run(input: &str, db_path: &str, buffer_size: usize, csv_headers: bool, batch_size: usize) -> Result<()> {
     println!("Running ETL:");
     println!("  input: {}", input);
     println!("  db: {}", db_path);
-    println!("  threads: {}", threads);
 
     /* Create a progress bar */
     let pb = ProgressBar::new_spinner();

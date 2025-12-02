@@ -30,10 +30,6 @@ pub enum Commands {
         /* Output SQLite database */   
         db_path: String,
         
-        /* Number of worker threads */
-        #[arg(short('t'), long, default_value = "4")]
-        threads: usize,
-
         /* Buffer size for bounded channels */
         #[arg(short('b'), long, default_value = "10000")]
         buffer_size: usize,

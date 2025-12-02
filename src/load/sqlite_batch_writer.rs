@@ -96,17 +96,21 @@ fn insert_batch(txn: &Transaction, batch: &[transform::TransformedRecord]) -> Re
 }
 
 fn configure_connection(conn: &Connection) -> rusqlite::Result<()> {
+    /* PRAGMA statements alter the operation of the SQLite library or to query the SQLite library
+    * for internal (non-table) data */
+
     /* Set Write-Ahead Logging mode 
     * ∙ Changes written to WAL file.
     * ∙ Commit performance increased as pages are appended to instead of re-written
+    * ∙ Allows multiple readers and one concurrent writer.
     * */
     conn.pragma_update(None, "journal_mode", &"WAL")?;
     /* Set how aggressively SQLite forces data to disk during writes
     * ∙ Do not want to comprise durability, but want improved performance
     * ∙ NORMAL mode is the middle ground
+    * ∙ NORMAL mode ensures that data is written to disk at the end of each transaction but does
+    *   not wait for the data to be fully synced to disk
     * */
     conn.pragma_update(None, "synchronous", &"NORMAL")?;
-//    conn.pragma_update(None, "temp_store", &"MEMORY")?;
-//    conn.pragma_update(None, "mmap_size", & (256 * 1024 * 1024))?;
     Ok(())
 }
