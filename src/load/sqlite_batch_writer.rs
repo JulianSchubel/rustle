@@ -81,6 +81,9 @@ fn insert_batch(txn: &Transaction, batch: &[transform::TransformedRecord]) -> Re
     /* Flatten parameters as SQLite receives a one dimensional parameter array */
     let params = params_from_iter(
         batch.iter().flat_map(|record| {
+            /* All of these types implement rustqlite::ToSql,
+            * as soon as one type has &dyn rustqlite::ToSql
+            * the compiler can infer that the array has this type.*/
             [
                 &record.id as &dyn rusqlite::ToSql,
                 &record.timestamp,
